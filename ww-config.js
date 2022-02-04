@@ -36,9 +36,9 @@ export default {
           { value: "fromTop", label: { en: "Appears from top", fr: "Apparait par le haut" } },
           { value: "fromRight", label: { en: "Appears from right", fr: "Apparait par la droite" } },
           { value: "fromLeft", label: { en: "Appears from left", fr: "Apparait par la gauche" } },
-          { value: "fromBottom", label: { en: "Appears from bottom", fr: "Apparait d'en bas" } },
-          { value: "zoomIn", label: { en: "Zoom in", fr: "Zoom intérieur" } },
-          { value: "zoomOut", label: { en: "Zoom out", fr: "Zoom extérieur" } },
+          { value: "fromBottom", label: { en: "Appears from bottom", fr: "Apparait par le bas" } },
+          { value: "zoomIn", label: { en: "Zoom in", fr: "Zoom arrière" } },
+          { value: "zoomOut", label: { en: "Zoom out", fr: "Zoom avant" } },
         ]
       },
       defaultValue: "fade"

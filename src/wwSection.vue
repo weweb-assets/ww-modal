@@ -3,7 +3,7 @@
     class="modal-container" 
     :style="backdropStyle"
   >
-    <transition name="fade" mode="out-in">
+    <transition :name="content.animation" mode="out-in">
       <wwLayout 
         v-if="show" 
         class="modal-dropzone" 
@@ -17,6 +17,8 @@
 </template>
 
 <script>
+import { presets } from './settings.js'
+
 export default {
   props: {
     content: { type: Object, required: true },
@@ -46,19 +48,28 @@ export default {
     },
     modalContentStyle() {
       if (this.content.position !== 'custom') {
-        return {}
+        return presets[this.content.position]
       }
-      
+
       return {
-          top: this.content.positionTop,
-          left: this.content.positionLeft,
+          '--top': this.content.positionTop,
+          '--left': this.content.positionLeft,
         }
-    }
+    },
   }
 };
 </script>
 
 <style lang="scss" scoped>
+:root {
+    --top: auto;
+    --right: auto;
+    --bottom: auto;
+    --left: auto;
+    --translateY: 0%;
+    --translateX: 0%;
+}
+
 .modal-container {
   display: flex;
   isolation: isolate;
@@ -75,69 +86,88 @@ export default {
   min-width: 100px;
   height: inset;
   width: inset;
+  top: var(--top);
+  right: var(--right);
+  bottom: var(--bottom);
+  left: var(--left);
+  transform: translate(var(--translateX), var(--translateY));
 }
 
-// .my-section {
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   min-height: 200px;
-//   h1 {
-//     font-size: 32px;
-//   }
-//   p {
-//     margin-top: 12px;
-//   }
-// }
-
-.topLeft {
-  top: 0;
-  left: 0;
-}
-.topMiddle {
-  top: 0;
-  left: 50%;
-  transform: translate(-50%);
-}
-.topRight {
-  top: 0;
-  right: 0;
-}
-.middleLeft {
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
-}
-.middle {
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-}
-.middleRight {
-  top: 50%;
-  right: 0;
-  transform: translateY(-50%);
-}
-.bottomLeft {
-  bottom: 0;
-  left: 0;
-}
-.bottomMiddle {
-  bottom: 0;
-  left: 50%;
-  transform: translate(-50%);
-}
-.bottomRight {
-  bottom: 0;
-  right: 0;
+.fade-enter-active,
+.fade-leave-active,
+.fromTop-enter-active,
+.fromTop-leave-active,
+.fromRight-enter-active,
+.fromRight-leave-active,
+.fromBottom-enter-active,
+.fromBottom-leave-active,
+.fromLeft-enter-active,
+.fromLeft-leave-active,
+.zoomIn-enter-active,
+.zoomIn-leave-active,
+.zoomOut-enter-active,
+.zoomOut-leave-active {
+  transition: all 300ms ease;
 }
 
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s;
-}
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+.fade-enter-from, .fade-leave-to {
   opacity: 0;
 }
+
+.fromTop-enter-from {
+    opacity: 0;
+    transform: translate(var(--translateX), -100%);
+}
+.fromTop-leave-to {
+    opacity: 0;
+    transform: translate(var(--translateX), -100%);
+}
+
+.fromRight-enter-from {
+    opacity: 0;
+    transform: translate(100%, var(--translateY));
+}
+.fromRight-leave-to {
+    opacity: 0;
+    transform: translate(100%, var(--translateY));
+}
+
+.fromBottom-enter-from {
+    opacity: 0;
+    transform: translate(var(--translateX), 100%);
+}
+.fromBottom-leave-to {
+    opacity: 0;
+    transform: translate(var(--translateX), 100%);
+}
+
+.fromLeft-enter-from {
+    opacity: 0;
+    transform: translate(-100%, var(--translateY));
+}
+.fromLeft-leave-to {
+    opacity: 0;
+    transform: translate(-100%, var(--translateY));
+}
+
+.zoomIn-enter-from {
+    opacity: 0;
+    transform: translate(var(--translateX), var(--translateY)) scale(1.5);
+}
+.zoomIn-leave-to {
+    opacity: 0;
+    transform: translate(var(--translateX), var(--translateY)) scale(1.5);
+}
+
+.zoomOut-enter-from {
+    opacity: 0;
+    transform: translate(var(--translateX), var(--translateY)) scale(0.5);
+}
+.zoomOut-leave-to {
+    opacity: 0;
+    transform: translate(var(--translateX), var(--translateY)) scale(0.5);
+}
+
 
 
 </style>
