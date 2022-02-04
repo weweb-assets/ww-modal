@@ -3,6 +3,8 @@ export default {
     label: {
       en: "Modal",
     },
+    enforcedTransitionProperty: 'all',
+    excludedSections: ['sizing', 'spacing', 'positioning', 'background', 'styling', 'advanced-style', 'customCss'],
   },
   properties: {
     display: {

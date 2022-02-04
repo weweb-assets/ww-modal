@@ -72,7 +72,6 @@ export default {
 
 .modal-container {
   display: flex;
-  isolation: isolate;
   position: fixed;
   top: 0;
   height: 100vh;
@@ -167,7 +166,5 @@ export default {
     opacity: 0;
     transform: translate(var(--translateX), var(--translateY)) scale(0.5);
 }
-
-
 
 </style>
