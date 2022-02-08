@@ -3,7 +3,6 @@ export default {
     label: {
       en: "Modal",
     },
-    enforcedTransitionProperty: 'all',
     excludedSections: ['sizing', 'spacing', 'positioning', 'background', 'styling', 'advanced-style', 'customCss'],
   },
   properties: {
@@ -110,6 +109,17 @@ export default {
       },
       defaultValue: "#00000080",
       hidden: content => !content.backdrop
+    },
+    transition: {
+      type: "Transitions",
+      label: {
+        en: "Transition",
+        fr: "Transition"
+      },
+      options: {
+        enforcedTransitionProperty: 'all',
+      },
+      defaultValue: 'all .3s ease'
     },
     modalContent: {
       defaultValue: [{

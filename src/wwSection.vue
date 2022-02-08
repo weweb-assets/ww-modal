@@ -5,7 +5,7 @@
   >
     <transition :name="content.animation" mode="out-in">
       <wwLayout 
-        v-if="show" 
+        v-show="show" 
         class="modal-dropzone" 
         direction="column" 
         path="modalContent" 
@@ -26,13 +26,6 @@ export default {
     wwEditorState : { type: Object, required: true }
     /* wwEditor:end */
   },
-  data() {
-    return {
-      wwDefaultContent: {
-        modalContent: []
-      }
-    }
-  },
   computed: {
     show () {
       /* wwEditor:start */
@@ -47,14 +40,22 @@ export default {
       };
     },
     modalContentStyle() {
+      const baseStyle = {
+        '--transition': this.content.transition
+      }
+
       if (this.content.position !== 'custom') {
-        return presets[this.content.position]
+        return {
+          ...baseStyle,
+          ...presets[this.content.position],
+        }
       }
 
       return {
-          '--top': this.content.positionTop,
-          '--left': this.content.positionLeft,
-        }
+        ...baseStyle,
+        '--top': this.content.positionTop,
+        '--left': this.content.positionLeft,
+      }
     },
   }
 };
@@ -68,6 +69,7 @@ export default {
     --left: auto;
     --translateY: 0%;
     --translateX: 0%;
+    --transition: none;
 }
 
 .modal-container {
@@ -106,7 +108,7 @@ export default {
 .zoomIn-leave-active,
 .zoomOut-enter-active,
 .zoomOut-leave-active {
-  transition: all 300ms ease;
+  transition: var(--transition);
 }
 
 .fade-enter-from, .fade-leave-to {
