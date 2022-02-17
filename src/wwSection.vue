@@ -83,8 +83,6 @@ export default {
 
 .modal-dropzone {
   position: absolute;
-  min-height: 100px;
-  min-width: 100px;
   height: inset;
   width: inset;
   top: var(--top);
