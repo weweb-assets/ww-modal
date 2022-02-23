@@ -5,7 +5,7 @@
   >
     <transition :name="content.animation" mode="out-in">
       <wwLayout 
-        v-show="show" 
+        v-show="show"
         class="modal-dropzone" 
         direction="column" 
         path="modalContent" 
@@ -27,17 +27,30 @@ export default {
     /* wwEditor:end */
   },
   computed: {
+    isEditing() {
+      /* wwEditor:start */
+      return this.wwEditorState.editMode === wwLib.wwEditorHelper.EDIT_MODES.EDITION;
+      /* wwEditor:end */
+      return false;
+    },
     show () {
       /* wwEditor:start */
-      return this.content.display || this.wwEditorState.sidepanelContent.displayInEditor;
+      return this.content.display || this.wwEditorState.sidepanelContent.displayInEditor && this.isEditing;
       /* wwEditor:end */
       return this.content.display;
     },
     backdropStyle() {
+      if (this.show && this.content.backdrop) {
+        return {
+          '--backdropColor': this.content.backdropColor,
+          '--backdropEvents': 'auto'
+        }
+      }
+
       return {
-        backgroundColor: (this.show && this.content.backdrop) ? this.content.backdropColor : 'transparent',
-        pointerEvents: (this.show && this.content.backdrop) ? 'auto' : 'none'
-      };
+        '--backdropColor': 'transparent',
+        '--backdropEvents': 'none'
+      }
     },
     modalContentStyle() {
       const baseStyle = {
@@ -70,6 +83,8 @@ export default {
     --translateY: 0%;
     --translateX: 0%;
     --transition: none;
+    --backdropColor: transparent;
+    --backdropEvents: none;
 }
 
 .modal-container {
@@ -79,6 +94,8 @@ export default {
   height: 100vh;
   z-index: 30;
   transition: background-color 0.5s;
+  background-color: var(--backdropColor);
+  pointer-events: var(--backdropEvents);
 }
 
 .modal-dropzone {
