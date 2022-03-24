@@ -13,6 +13,7 @@ export default {
                 fr: "Afficher",
             },
             bindable: true,
+            responsive: true,
             defaultValue: true,
         },
         displayInEditor: {
