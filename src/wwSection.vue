@@ -1,76 +1,66 @@
 <template>
-  <div 
-    class="modal-container" 
-    :style="backdropStyle"
-  >
-    <transition :name="content.animation" mode="out-in">
-      <wwLayout 
-        v-show="show"
-        class="modal-dropzone" 
-        direction="column" 
-        path="modalContent" 
-        :class="content.position" 
-        :style="modalContentStyle"
-      ></wwLayout>
-    </transition>
-  </div>
+    <div class="modal-container" :style="backdropStyle">
+        <transition :name="content.animation" mode="out-in">
+            <wwLayout v-show="show" class="modal-dropzone" direction="column" path="modalContent" :class="content.position" :style="modalContentStyle" :inherit-from-element="['width']"></wwLayout>
+        </transition>
+    </div>
 </template>
 
 <script>
-import { presets } from './settings.js'
+import { presets } from "./settings.js";
 
 export default {
-  props: {
-    content: { type: Object, required: true },
-    /* wwEditor:start */
-    wwEditorState : { type: Object, required: true }
-    /* wwEditor:end */
-  },
-  computed: {
-    isEditing() {
-      /* wwEditor:start */
-      return this.wwEditorState.editMode === wwLib.wwEditorHelper.EDIT_MODES.EDITION;
-      /* wwEditor:end */
-      return false;
+    props: {
+        content: { type: Object, required: true },
+        /* wwEditor:start */
+        wwEditorState: { type: Object, required: true },
+        /* wwEditor:end */
     },
-    show () {
-      /* wwEditor:start */
-      return this.content.display || this.wwEditorState.sidepanelContent.displayInEditor && this.isEditing;
-      /* wwEditor:end */
-      return this.content.display;
-    },
-    backdropStyle() {
-      if (this.show && this.content.backdrop) {
-        return {
-          '--backdropColor': this.content.backdropColor,
-          '--backdropEvents': 'auto'
-        }
-      }
+    computed: {
+        isEditing() {
+            /* wwEditor:start */
+            return this.wwEditorState.editMode === wwLib.wwEditorHelper.EDIT_MODES.EDITION;
+            /* wwEditor:end */
+            return false;
+        },
+        show() {
+            /* wwEditor:start */
+            return this.content.display || (this.wwEditorState.sidepanelContent.displayInEditor && this.isEditing);
+            /* wwEditor:end */
+            return this.content.display;
+        },
+        backdropStyle() {
+            if (this.show && this.content.backdrop) {
+                return {
+                    "--backdropColor": this.content.backdropColor,
+                    "--backdropEvents": "auto",
+                };
+            }
 
-      return {
-        '--backdropColor': 'transparent',
-        '--backdropEvents': 'none'
-      }
-    },
-    modalContentStyle() {
-      const baseStyle = {
-        '--transition': this.content.transition
-      }
+            return {
+                "--backdropColor": "transparent",
+                "--backdropEvents": "none",
+            };
+        },
+        modalContentStyle() {
+            const baseStyle = {
+                "--transition": this.content.transition,
+            };
 
-      if (this.content.position !== 'custom') {
-        return {
-          ...baseStyle,
-          ...presets[this.content.position],
-        }
-      }
+            if (this.content.position !== "custom") {
+                return {
+                    ...baseStyle,
+                    ...presets[this.content.position],
+                };
+            }
 
-      return {
-        ...baseStyle,
-        '--top': this.content.positionTop,
-        '--left': this.content.positionLeft,
-      }
+            return {
+                ...baseStyle,
+                "--top": this.content.positionTop,
+                "--left": this.content.positionLeft,
+            };
+        },
     },
-  }
 };
 </script>
 
@@ -88,25 +78,28 @@ export default {
 }
 
 .modal-container {
-  display: flex;
-  position: fixed;
-  top: 0;
-  height: 100vh;
-  z-index: 30;
-  transition: background-color 0.5s;
-  background-color: var(--backdropColor);
-  pointer-events: var(--backdropEvents);
+    display: flex;
+    position: fixed;
+    top: 0;
+    height: 100vh;
+    z-index: 30;
+    transition: background-color 0.5s;
+    background-color: var(--backdropColor);
+    pointer-events: var(--backdropEvents);
 }
 
 .modal-dropzone {
-  position: absolute;
-  height: inset;
-  width: inset;
-  top: var(--top);
-  right: var(--right);
-  bottom: var(--bottom);
-  left: var(--left);
-  transform: translate(var(--translateX), var(--translateY));
+    position: absolute;
+    width: 100%;
+    height: inset;
+    width: inset;
+    top: var(--top);
+    right: var(--right);
+    bottom: var(--bottom);
+    left: var(--left);
+    transform: translate(var(--translateX), var(--translateY));
+    display: flex;
+    justify-content: var(--align);
 }
 
 .fade-enter-active,
@@ -123,11 +116,12 @@ export default {
 .zoomIn-leave-active,
 .zoomOut-enter-active,
 .zoomOut-leave-active {
-  transition: var(--transition);
+    transition: var(--transition);
 }
 
-.fade-enter-from, .fade-leave-to {
-  opacity: 0;
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
 }
 
 .fromTop-enter-from {
@@ -183,5 +177,4 @@ export default {
     opacity: 0;
     transform: translate(var(--translateX), var(--translateY)) scale(0.5);
 }
-
 </style>
