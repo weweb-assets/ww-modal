@@ -100,6 +100,10 @@ export default {
     transform: translate(var(--translateX), var(--translateY));
     display: flex;
     justify-content: var(--align);
+    pointer-event:none;
+    & * {
+        pointer-event:all;
+    }
 }
 
 .fade-enter-active,
