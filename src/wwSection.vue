@@ -1,7 +1,7 @@
 <template>
-    <div class="modal-container" :style="backdropStyle">
+    <div class="modal-container" :style="backdropStyle" ww-responsive="modal-container">
         <transition :name="content.animation" mode="out-in">
-            <wwLayout v-show="show" class="modal-dropzone" direction="column" path="modalContent" :class="content.position" :style="modalContentStyle" :inherit-from-element="['width']"></wwLayout>
+            <wwLayout v-show="show" class="modal-dropzone" direction="column" path="modalContent" :class="content.position" :style="modalContentStyle"  ww-responsive="modal-dropzone" :inherit-from-element="['width']"></wwLayout>
         </transition>
     </div>
 </template>
