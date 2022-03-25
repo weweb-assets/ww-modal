@@ -100,9 +100,9 @@ export default {
     transform: translate(var(--translateX), var(--translateY));
     display: flex;
     justify-content: var(--align);
-    pointer-event:none;
+    pointer-events:none;
     & * {
-        pointer-event:all;
+        pointer-events:all;
     }
 }
 
