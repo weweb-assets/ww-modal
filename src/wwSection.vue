@@ -65,7 +65,7 @@ export default {
     watch: {
         /* wwEditor:start */
         'wwEditorState.boundProps.display'(isBind, wasBind) {
-            if (wasBind && !isBind) this.$emit('update:sidepanel-content:effect', { path: 'diplayInEditor', value: false });
+            if (wasBind && !isBind) this.$emit('update:sidepanel-content', { path: 'displayInEditor', value: false });
         },
         /* wwEditor:end */
     }
