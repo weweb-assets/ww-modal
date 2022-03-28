@@ -64,7 +64,7 @@ export default {
     },
     watch: {
         /* wwEditor:start */
-        'wwEditorState.boundProps.options'(isBind, wasBind) {
+        'wwEditorState.boundProps.display'(isBind, wasBind) {
             if (wasBind && !isBind) this.$emit('update:sidepanel-content:effect', { path: 'diplayInEditor', value: false });
         },
         /* wwEditor:end */
