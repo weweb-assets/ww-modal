@@ -16,6 +16,7 @@ export default {
         wwEditorState: { type: Object, required: true },
         /* wwEditor:end */
     },
+    emits: ['update:sidepanel-content'],
     computed: {
         isEditing() {
             /* wwEditor:start */
@@ -61,6 +62,13 @@ export default {
             };
         },
     },
+    watch: {
+        /* wwEditor:start */
+        'wwEditorState.boundProps.options'(isBind, wasBind) {
+            if (wasBind && !isBind) this.$emit('update:sidepanel-content:effect', { path: 'diplayInEditor', value: false });
+        },
+        /* wwEditor:end */
+    }
 };
 </script>
 

@@ -19,8 +19,8 @@ export default {
         displayInEditor: {
             type: "OnOff",
             label: {
-                en: "Display in editor mode",
-                fr: "Afficher en mode édition",
+                en: "Force display in editor",
+                fr: "Forcer l'affichage dans l'éditeur",
             },
             editorOnly: true,
             hidden: (content, sidepanelContent, boundProps) => !boundProps.display,
