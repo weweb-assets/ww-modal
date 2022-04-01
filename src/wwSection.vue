@@ -6,7 +6,6 @@
   >
     <transition :name="content.animation" mode="out-in">
       <wwLayout
-        v-show="show"
         class="modal-dropzone"
         direction="column"
         path="modalContent"
@@ -63,6 +62,7 @@ export default {
     },
     modalContentStyle() {
       const baseStyle = {
+        display: this.show ? "flex": "none",
         "--transition": this.content.transition,
       };
 
