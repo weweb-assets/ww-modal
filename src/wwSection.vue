@@ -1,117 +1,147 @@
 <template>
-    <div class="modal-container" :style="backdropStyle" ww-responsive="modal-container">
-        <transition :name="content.animation" mode="out-in">
-            <wwLayout v-show="show" class="modal-dropzone" direction="column" path="modalContent" :class="content.position" :style="modalContentStyle"  ww-responsive="modal-dropzone" :inherit-from-element="['width']"></wwLayout>
-        </transition>
-    </div>
+  <div
+    class="modal-container"
+    :style="backdropStyle"
+    ww-responsive="modal-container"
+  >
+    <div class="modal-container__hydration-trigger"></div>
+    <transition :name="content.animation" mode="out-in">
+      <wwLayout
+        v-show="show"
+        class="modal-dropzone"
+        direction="column"
+        path="modalContent"
+        :class="content.position"
+        :style="modalContentStyle"
+        ww-responsive="modal-dropzone"
+        :inherit-from-element="['width']"
+      ></wwLayout>
+    </transition>
+  </div>
 </template>
 
 <script>
 import { presets } from "./settings.js";
 
 export default {
-    props: {
-        content: { type: Object, required: true },
-        /* wwEditor:start */
-        wwEditorState: { type: Object, required: true },
-        /* wwEditor:end */
+  props: {
+    content: { type: Object, required: true },
+    /* wwEditor:start */
+    wwEditorState: { type: Object, required: true },
+    /* wwEditor:end */
+  },
+  emits: ["update:sidepanel-content"],
+  computed: {
+    isEditing() {
+      /* wwEditor:start */
+      return (
+        this.wwEditorState.editMode === wwLib.wwEditorHelper.EDIT_MODES.EDITION
+      );
+      /* wwEditor:end */
+      return false;
     },
-    emits: ['update:sidepanel-content'],
-    computed: {
-        isEditing() {
-            /* wwEditor:start */
-            return this.wwEditorState.editMode === wwLib.wwEditorHelper.EDIT_MODES.EDITION;
-            /* wwEditor:end */
-            return false;
-        },
-        show() {
-            /* wwEditor:start */
-            return this.content.display || (this.wwEditorState.sidepanelContent.displayInEditor && this.isEditing);
-            /* wwEditor:end */
-            return this.content.display;
-        },
-        backdropStyle() {
-            if (this.show && this.content.backdrop) {
-                return {
-                    "--backdropColor": this.content.backdropColor,
-                    "--backdropEvents": "auto",
-                };
-            }
-
-            return {
-                "--backdropColor": "transparent",
-                "--backdropEvents": "none",
-            };
-        },
-        modalContentStyle() {
-            const baseStyle = {
-                "--transition": this.content.transition,
-            };
-
-            if (this.content.position !== "custom") {
-                return {
-                    ...baseStyle,
-                    ...presets[this.content.position],
-                };
-            }
-
-            return {
-                ...baseStyle,
-                "--top": this.content.positionTop,
-                "--left": this.content.positionLeft,
-            };
-        },
+    show() {
+      /* wwEditor:start */
+      return (
+        this.content.display ||
+        (this.wwEditorState.sidepanelContent.displayInEditor && this.isEditing)
+      );
+      /* wwEditor:end */
+      return this.content.display;
     },
-    watch: {
-        /* wwEditor:start */
-        'wwEditorState.boundProps.display'(isBind, wasBind) {
-            if (wasBind && !isBind) this.$emit('update:sidepanel-content', { path: 'displayInEditor', value: false });
-        },
-        /* wwEditor:end */
-    }
+    backdropStyle() {
+      if (this.show && this.content.backdrop) {
+        return {
+          "--backdropColor": this.content.backdropColor,
+          "--backdropEvents": "auto",
+        };
+      }
+
+      return {
+        "--backdropColor": "transparent",
+        "--backdropEvents": "none",
+      };
+    },
+    modalContentStyle() {
+      const baseStyle = {
+        "--transition": this.content.transition,
+      };
+
+      if (this.content.position !== "custom") {
+        return {
+          ...baseStyle,
+          ...presets[this.content.position],
+        };
+      }
+
+      return {
+        ...baseStyle,
+        "--top": this.content.positionTop,
+        "--left": this.content.positionLeft,
+      };
+    },
+  },
+  watch: {
+    /* wwEditor:start */
+    "wwEditorState.boundProps.display"(isBind, wasBind) {
+      if (wasBind && !isBind)
+        this.$emit("update:sidepanel-content", {
+          path: "displayInEditor",
+          value: false,
+        });
+    },
+    /* wwEditor:end */
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 :root {
-    --top: auto;
-    --right: auto;
-    --bottom: auto;
-    --left: auto;
-    --translateY: 0%;
-    --translateX: 0%;
-    --transition: none;
-    --backdropColor: transparent;
-    --backdropEvents: none;
+  --top: auto;
+  --right: auto;
+  --bottom: auto;
+  --left: auto;
+  --translateY: 0%;
+  --translateX: 0%;
+  --transition: none;
+  --backdropColor: transparent;
+  --backdropEvents: none;
 }
 
 .modal-container {
-    display: flex;
+  display: flex;
+  position: fixed;
+  top: 0;
+  height: 100vh;
+  z-index: 30;
+  transition: background-color 0.5s;
+  background-color: var(--backdropColor);
+  pointer-events: var(--backdropEvents);
+
+  &__hydration-trigger {
     position: fixed;
-    top: 0;
-    height: 100vh;
-    z-index: 30;
-    transition: background-color 0.5s;
-    background-color: var(--backdropColor);
-    pointer-events: var(--backdropEvents);
+    height: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
 }
 
 .modal-dropzone {
-    position: absolute;
-    width: 100%;
-    height: inset;
-    width: inset;
-    top: var(--top);
-    right: var(--right);
-    bottom: var(--bottom);
-    left: var(--left);
-    transform: translate(var(--translateX), var(--translateY));
-    display: flex;
-    justify-content: var(--align);
-    pointer-events:none;
-    & * {
-        pointer-events:all;
-    }
+  position: absolute;
+  width: 100%;
+  height: inset;
+  width: inset;
+  top: var(--top);
+  right: var(--right);
+  bottom: var(--bottom);
+  left: var(--left);
+  transform: translate(var(--translateX), var(--translateY));
+  display: flex;
+  justify-content: var(--align);
+  pointer-events: none;
+  & * {
+    pointer-events: all;
+  }
 }
 
 .fade-enter-active,
@@ -128,65 +158,65 @@ export default {
 .zoomIn-leave-active,
 .zoomOut-enter-active,
 .zoomOut-leave-active {
-    transition: var(--transition);
+  transition: var(--transition);
 }
 
 .fade-enter-from,
 .fade-leave-to {
-    opacity: 0;
+  opacity: 0;
 }
 
 .fromTop-enter-from {
-    opacity: 0;
-    transform: translate(var(--translateX), -100%);
+  opacity: 0;
+  transform: translate(var(--translateX), -100%);
 }
 .fromTop-leave-to {
-    opacity: 0;
-    transform: translate(var(--translateX), -100%);
+  opacity: 0;
+  transform: translate(var(--translateX), -100%);
 }
 
 .fromRight-enter-from {
-    opacity: 0;
-    transform: translate(100%, var(--translateY));
+  opacity: 0;
+  transform: translate(100%, var(--translateY));
 }
 .fromRight-leave-to {
-    opacity: 0;
-    transform: translate(100%, var(--translateY));
+  opacity: 0;
+  transform: translate(100%, var(--translateY));
 }
 
 .fromBottom-enter-from {
-    opacity: 0;
-    transform: translate(var(--translateX), 100%);
+  opacity: 0;
+  transform: translate(var(--translateX), 100%);
 }
 .fromBottom-leave-to {
-    opacity: 0;
-    transform: translate(var(--translateX), 100%);
+  opacity: 0;
+  transform: translate(var(--translateX), 100%);
 }
 
 .fromLeft-enter-from {
-    opacity: 0;
-    transform: translate(-100%, var(--translateY));
+  opacity: 0;
+  transform: translate(-100%, var(--translateY));
 }
 .fromLeft-leave-to {
-    opacity: 0;
-    transform: translate(-100%, var(--translateY));
+  opacity: 0;
+  transform: translate(-100%, var(--translateY));
 }
 
 .zoomIn-enter-from {
-    opacity: 0;
-    transform: translate(var(--translateX), var(--translateY)) scale(1.5);
+  opacity: 0;
+  transform: translate(var(--translateX), var(--translateY)) scale(1.5);
 }
 .zoomIn-leave-to {
-    opacity: 0;
-    transform: translate(var(--translateX), var(--translateY)) scale(1.5);
+  opacity: 0;
+  transform: translate(var(--translateX), var(--translateY)) scale(1.5);
 }
 
 .zoomOut-enter-from {
-    opacity: 0;
-    transform: translate(var(--translateX), var(--translateY)) scale(0.5);
+  opacity: 0;
+  transform: translate(var(--translateX), var(--translateY)) scale(0.5);
 }
 .zoomOut-leave-to {
-    opacity: 0;
-    transform: translate(var(--translateX), var(--translateY)) scale(0.5);
+  opacity: 0;
+  transform: translate(var(--translateX), var(--translateY)) scale(0.5);
 }
 </style>
