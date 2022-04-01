@@ -5,6 +5,9 @@ export default {
         },
         excludedSections: ["sizing", "spacing", "positioning", "background", "styling", "advanced-style", "customCss"],
     },
+    options: {
+        forceHydration: true,
+    },
     properties: {
         display: {
             type: "OnOff",

@@ -4,7 +4,6 @@
     :style="backdropStyle"
     ww-responsive="modal-container"
   >
-    <div class="modal-container__hydration-trigger"></div>
     <transition :name="content.animation" mode="out-in">
       <wwLayout
         v-show="show"
@@ -117,13 +116,6 @@ export default {
   transition: background-color 0.5s;
   background-color: var(--backdropColor);
   pointer-events: var(--backdropEvents);
-
-  &__hydration-trigger {
-    position: fixed;
-    height: 0;
-    opacity: 0;
-    pointer-events: none;
-  }
 }
 
 .modal-dropzone {
