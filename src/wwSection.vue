@@ -6,7 +6,7 @@
   >
     <transition :name="content.animation" mode="out-in">
       <wwLayout
-        v-show="show"
+        v-if="show"
         class="modal-dropzone"
         direction="column"
         path="modalContent"
