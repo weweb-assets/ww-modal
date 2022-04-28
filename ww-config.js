@@ -5,6 +5,9 @@ export default {
         },
         excludedSections: ["sizing", "spacing", "positioning", "background", "styling", "advanced-style", "customCss"],
     },
+    triggerEvents: [
+        { name: 'backdropClick', label: { en: 'On backdrop click' } },
+    ],
     options: {
         forceHydration: true,
     },
