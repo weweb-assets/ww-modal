@@ -3,6 +3,7 @@
     class="modal-container"
     :style="backdropStyle"
     ww-responsive="modal-container"
+    @click.self="$emit('trigger-event', { name: 'backdropClick' })"
   >
     <transition :name="content.animation" mode="out-in">
       <wwLayout
@@ -29,7 +30,7 @@ export default {
     wwEditorState: { type: Object, required: true },
     /* wwEditor:end */
   },
-  emits: ["update:sidepanel-content"],
+  emits: ["trigger-event", "update:sidepanel-content"],
   computed: {
     isEditing() {
       /* wwEditor:start */
