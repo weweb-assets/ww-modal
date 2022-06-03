@@ -73,6 +73,7 @@ export default {
             },
             defaultValue: "middle",
             responsive: true,
+            bindable: true,
         },
         positionLeft: {
             hidden: (content) => content.position !== "custom",
@@ -89,6 +90,7 @@ export default {
             },
             defaultValue: "0%",
             responsive: true,
+            bindable: true,
         },
         positionTop: {
             hidden: (content) => content.position !== "custom",
@@ -105,6 +107,7 @@ export default {
             },
             defaultValue: "0%",
             responsive: true,
+            bindable: true,
         },
         backdrop: {
             type: "OnOff",
