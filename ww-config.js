@@ -49,6 +49,7 @@ export default {
                     { value: "zoomOut", label: { en: "Zoom out", fr: "Zoom avant" } },
                 ],
             },
+            responsive: true,
             defaultValue: "fade",
         },
         position: {
@@ -116,6 +117,7 @@ export default {
                 fr: "Fond",
             },
             defaultValue: true,
+            responsive: true,
         },
         backdropColor: {
             type: "Color",
@@ -124,6 +126,7 @@ export default {
                 fr: "Couleur du fond",
             },
             defaultValue: "#00000080",
+            responsive: true,
             hidden: (content) => !content.backdrop,
         },
         transition: {
@@ -136,6 +139,7 @@ export default {
                 enforcedTransitionProperty: "all",
             },
             defaultValue: "all .3s ease",
+            responsive: true,
         },
         modalContent: {
             defaultValue: [
