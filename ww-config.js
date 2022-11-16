@@ -116,6 +116,7 @@ export default {
                 en: "Backdrop",
                 fr: "Fond",
             },
+            bindable: true,
             defaultValue: true,
             responsive: true,
         },
@@ -125,6 +126,7 @@ export default {
                 en: "Backdrop color",
                 fr: "Couleur du fond",
             },
+            bindable: true,
             defaultValue: "#00000080",
             responsive: true,
             hidden: (content) => !content.backdrop,
@@ -138,6 +140,7 @@ export default {
             options: {
                 enforcedTransitionProperty: "all",
             },
+            bindable: true,
             defaultValue: "all .3s ease",
             responsive: true,
         },
