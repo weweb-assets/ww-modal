@@ -110,6 +110,24 @@ export default {
             responsive: true,
             bindable: true,
         },
+        zIndex: {
+            label: {
+                en: "Z axis",
+            },
+            type: 'Number',
+            options: {
+                min: 0,
+                max: 100,
+            },
+            responsive: true,
+            bindable: true,
+            states: true,
+            bindingValidation: {
+                markdown: 'z-index',
+                type: 'string',
+                cssSupports: 'z-index',
+            },
+        },
         backdrop: {
             type: "OnOff",
             label: {
