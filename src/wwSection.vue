@@ -121,16 +121,19 @@ export default {
 
 .modal-dropzone {
   position: absolute;
-  width: 100%;
   height: inset;
-  width: inset;
+  width: 100%;
+  height: 100%;
   top: var(--top);
   right: var(--right);
   bottom: var(--bottom);
   left: var(--left);
   transform: translate(var(--translateX), var(--translateY));
   display: flex;
-  justify-content: var(--align);
+
+  align-items: var(--align) !important;
+  justify-content: var(--justify) !important;
+
   pointer-events: none;
   & * {
     pointer-events: all;
