@@ -74,11 +74,7 @@ export default {
         };
       }
 
-      return {
-        ...baseStyle,
-        "--top": this.content.positionTop,
-        "--left": this.content.positionLeft,
-      };
+      return baseStyle;
     },
   },
   watch: {
@@ -97,12 +93,6 @@ export default {
 
 <style lang="scss" scoped>
 :root {
-  --top: auto;
-  --right: auto;
-  --bottom: auto;
-  --left: auto;
-  --translateY: 0%;
-  --translateX: 0%;
   --transition: none;
   --backdropColor: transparent;
   --backdropEvents: none;
@@ -124,11 +114,6 @@ export default {
   height: inset;
   width: 100%;
   height: 100%;
-  top: var(--top);
-  right: var(--right);
-  bottom: var(--bottom);
-  left: var(--left);
-  transform: translate(var(--translateX), var(--translateY));
   display: flex;
 
   align-items: var(--align) !important;
