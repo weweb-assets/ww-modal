@@ -74,11 +74,7 @@ export default {
         };
       }
 
-      return {
-        ...baseStyle,
-        "--top": this.content.positionTop,
-        "--left": this.content.positionLeft,
-      };
+      return baseStyle;
     },
   },
   watch: {
@@ -97,12 +93,6 @@ export default {
 
 <style lang="scss" scoped>
 :root {
-  --top: auto;
-  --right: auto;
-  --bottom: auto;
-  --left: auto;
-  --translateY: 0%;
-  --translateX: 0%;
   --transition: none;
   --backdropColor: transparent;
   --backdropEvents: none;
@@ -124,11 +114,6 @@ export default {
   height: inset;
   width: 100%;
   height: 100%;
-  top: var(--top);
-  right: var(--right);
-  bottom: var(--bottom);
-  left: var(--left);
-  transform: translate(var(--translateX), var(--translateY));
   display: flex;
 
   align-items: var(--align) !important;
@@ -164,55 +149,55 @@ export default {
 
 .fromTop-enter-from {
   opacity: 0;
-  transform: translate(var(--translateX), -100%);
+  transform: translate(0%, -100%);
 }
 .fromTop-leave-to {
   opacity: 0;
-  transform: translate(var(--translateX), -100%);
+  transform: translate(0%, -100%);
 }
 
 .fromRight-enter-from {
   opacity: 0;
-  transform: translate(100%, var(--translateY));
+  transform: translate(100%, 0%);
 }
 .fromRight-leave-to {
   opacity: 0;
-  transform: translate(100%, var(--translateY));
+  transform: translate(100%, 0%);
 }
 
 .fromBottom-enter-from {
   opacity: 0;
-  transform: translate(var(--translateX), 100%);
+  transform: translate(0%, 100%);
 }
 .fromBottom-leave-to {
   opacity: 0;
-  transform: translate(var(--translateX), 100%);
+  transform: translate(0%, 100%);
 }
 
 .fromLeft-enter-from {
   opacity: 0;
-  transform: translate(-100%, var(--translateY));
+  transform: translate(-100%, 0%);
 }
 .fromLeft-leave-to {
   opacity: 0;
-  transform: translate(-100%, var(--translateY));
+  transform: translate(-100%, 0%);
 }
 
 .zoomIn-enter-from {
   opacity: 0;
-  transform: translate(var(--translateX), var(--translateY)) scale(1.5);
+  transform: translate(0%, 0%) scale(1.5);
 }
 .zoomIn-leave-to {
   opacity: 0;
-  transform: translate(var(--translateX), var(--translateY)) scale(1.5);
+  transform: translate(0%, 0%) scale(1.5);
 }
 
 .zoomOut-enter-from {
   opacity: 0;
-  transform: translate(var(--translateX), var(--translateY)) scale(0.5);
+  transform: translate(0%, 0%) scale(0.5);
 }
 .zoomOut-leave-to {
   opacity: 0;
-  transform: translate(var(--translateX), var(--translateY)) scale(0.5);
+  transform: translate(0%, 0%) scale(0.5);
 }
 </style>
