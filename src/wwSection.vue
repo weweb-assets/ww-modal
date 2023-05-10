@@ -54,6 +54,7 @@ export default {
         return {
           "--backdropColor": this.content.backdropColor,
           "--backdropEvents": "auto",
+          "zIndex": this.content.zIndex
         };
       }
 
