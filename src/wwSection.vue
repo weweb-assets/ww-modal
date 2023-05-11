@@ -3,7 +3,7 @@
     class="modal-container"
     :style="backdropStyle"
     ww-responsive="modal-container"
-    @click.self="$emit('trigger-event', { name: 'backdropClick' })"
+    @mousedown.self="$emit('trigger-event', { name: 'backdropClick' })"
   >
     <transition :name="content.animation" mode="out-in">
       <wwLayout
