@@ -75,7 +75,11 @@ export default {
         };
       }
 
-      return baseStyle;
+      return {
+        ...baseStyle,
+        "--top": this.content.positionTop,
+        "--left": this.content.positionLeft,
+      };
     },
   },
   watch: {
@@ -97,6 +101,8 @@ export default {
   --transition: none;
   --backdropColor: transparent;
   --backdropEvents: none;
+  --top: unset;
+  --left: unset;
 }
 
 .modal-container {
@@ -119,6 +125,9 @@ export default {
 
   align-items: var(--align) !important;
   justify-content: var(--justify) !important;
+
+  top: var(--top);
+  left: var(--left);
 
   pointer-events: none;
   & * {
