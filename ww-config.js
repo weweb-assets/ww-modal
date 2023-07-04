@@ -5,9 +5,7 @@ export default {
         },
         excludedSections: ["sizing", "spacing", "positioning", "background", "styling", "advanced-style", "customCss"],
     },
-    triggerEvents: [
-        { name: 'backdropClick', label: { en: 'On backdrop click' } },
-    ],
+    triggerEvents: [{ name: "backdropClick", label: { en: "On backdrop click" } }],
     options: {
         forceHydration: true,
     },
@@ -50,6 +48,8 @@ export default {
                 ],
             },
             responsive: true,
+            states: true,
+            classes: true,
             defaultValue: "fade",
         },
         position: {
@@ -74,6 +74,8 @@ export default {
             },
             defaultValue: "middle",
             responsive: true,
+            states: true,
+            classes: true,
             bindable: true,
         },
         positionLeft: {
@@ -92,6 +94,8 @@ export default {
             defaultValue: "0%",
             responsive: true,
             bindable: true,
+            states: true,
+            classes: true,
         },
         positionTop: {
             hidden: (content) => content.position !== "custom",
@@ -109,12 +113,14 @@ export default {
             defaultValue: "0%",
             responsive: true,
             bindable: true,
+            states: true,
+            classes: true,
         },
         zIndex: {
             label: {
                 en: "Z axis",
             },
-            type: 'Number',
+            type: "Number",
             options: {
                 min: 0,
                 max: 100,
@@ -122,10 +128,11 @@ export default {
             responsive: true,
             bindable: true,
             states: true,
+            classes: true,
             bindingValidation: {
-                markdown: 'z-index',
-                type: 'string',
-                cssSupports: 'z-index',
+                markdown: "z-index",
+                type: "string",
+                cssSupports: "z-index",
             },
         },
         backdrop: {
@@ -137,6 +144,8 @@ export default {
             bindable: true,
             defaultValue: true,
             responsive: true,
+            states: true,
+            classes: true,
         },
         backdropColor: {
             type: "Color",
@@ -145,8 +154,10 @@ export default {
                 fr: "Couleur du fond",
             },
             bindable: true,
-            defaultValue: "#00000080",
+            defaultValue: undefined,
             responsive: true,
+            states: true,
+            classes: true,
             hidden: (content) => !content.backdrop,
         },
         transition: {
@@ -161,6 +172,7 @@ export default {
             bindable: true,
             defaultValue: "all .3s ease",
             responsive: true,
+            classes: true,
         },
         modalContent: {
             defaultValue: [
