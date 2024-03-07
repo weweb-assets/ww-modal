@@ -105,7 +105,8 @@ export default {
     display: flex;
     position: fixed;
     top: 0;
-    height: 100vh;
+    height: 100vh; // fallback for older browsers
+    height: 100dvh;
     z-index: 30;
     transition: background-color 0.5s;
     background-color: var(--backdropColor);
