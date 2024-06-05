@@ -127,9 +127,6 @@ export default {
     left: var(--left);
 
     pointer-events: none;
-    & * {
-        pointer-events: all;
-    }
 }
 
 .fade-enter-active,
