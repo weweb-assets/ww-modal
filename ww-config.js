@@ -5,7 +5,7 @@ export default {
         },
         excludedSections: ["sizing", "spacing", "positioning", "background", "styling", "advanced-style", "customCss"],
     },
-    triggerEvents: [{ name: "backdropClick", label: { en: "On backdrop click" } }],
+    triggerEvents: [{ name: "backdropClick", label: { en: "On backdrop click" }, description: "Run when the modal backdrop is clicked." }],
     options: {
         forceHydration: true,
     },
